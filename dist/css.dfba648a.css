@@ -1,0 +1,237 @@
+/*确保播放器区域的样式不被污染*/
+
+#html5-musicplayer {
+    width: 100%;
+    min-width: 200px;
+    max-width: 500px !important;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden !important;
+    box-shadow: 0px 0px 8px #666;
+}
+
+#music-wrapper-bg {
+    position: absolute;
+    filter: blur(10px) brightness(1.5) contrast(0.6);
+    -webkit-filter: blur(10px) brightness(1.5) contrast(0.6);;
+    opacity: 0.6;
+    top: 0;
+    z-index: -1;
+}
+
+#music-wrapper {
+    padding: 10px;
+    padding-left: 0;
+    box-shadow: 0px 0px 8px #aaaaaa;
+}
+
+#music-avatar {
+    margin: 0 0 0 10px;
+    float: left;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+#music-wrapper .avatar-wrapper {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    animation: rotating 4s linear infinite;
+    animation-play-state: paused;
+}
+
+#music-wrapper .avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin: auto;
+}
+
+#avatar-bgimg {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background-color: #222;
+    background-size: cover;
+}
+
+#audioPlayer {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-color: rgba(255, 255, 255, .2);
+    animation: unrotating 4s linear infinite;
+    animation-play-state: paused;
+}
+
+#music-info-wrapper {
+    margin-left: 100px !important;
+    height: 80px;
+}
+
+#music-info {
+    display: flex;
+    flex-direction: row;
+}
+
+#music-baseinfo {
+    flex: 3;
+    height: 60px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden !important;
+}
+
+#music-title {
+    font-size: 14px;
+}
+
+#music-author {
+    font-size: 12px;
+    color: #666;
+}
+
+/*donghua*/
+
+#music-author, #music-title {
+    word-break: keep-all;
+    white-space: nowrap;
+    animation: wordsLoop 8s linear infinite;
+    animation-play-state: paused;
+}
+
+#music-lrc {
+    flex: 7;
+    font-size: 14px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#music-controller {
+    display: inline;
+    padding-top: 12px;
+}
+
+/*-- progress start --*/
+
+#music-wrapper .progress-bar-bg {
+    margin-top: 4px;
+    background-color: #d9d9d9;
+    position: absolute;
+    height: 4px;
+    cursor: pointer;
+}
+
+#music-wrapper .progress-bar {
+    background-color: #649fec;
+    width: 0;
+    height: 2px;
+}
+
+#progressDot {
+    content: " ";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #3e87e8;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -5px;
+    margin-left: -1px;
+    cursor: pointer;
+}
+
+/*-- progress end --*/
+
+#music-wrapper .audio-time {
+    overflow: hidden;
+    margin-top: 12px !important;
+    line-height: 14px !important;
+}
+
+#music-wrapper .audio-length-total {
+    float: right;
+    font-size: 12px;
+}
+
+#music-wrapper .audio-length-current {
+    float: left;
+    font-size: 12px;
+}
+
+@keyframes wordsLoop {
+    0% {
+        transform: translateX(0%);
+        -webkit-transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-140%);
+        -webkit-transform: translateX(-140%);
+    }
+}
+
+@keyframes unrotating {
+    from {
+        transform: rotate(360deg)
+    }
+    to {
+        transform: rotate(0deg)
+    }
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+/*iconfont*/
+
+/*@font-face {
+    font-family: "iconfont";
+    src: url('iconfont.eot?t=1546339992655');
+    !* IE9*!
+    src: url('iconfont.eot?t=1546339992655#iefix') format('embedded-opentype'), !* IE6-IE8 *!
+    url('data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAQ4AAsAAAAABogAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFY82Uz2Y21hcAAAAYAAAABVAAABhnkf0ZRnbHlmAAAB2AAAAHAAAABwrJZaJGhlYWQAAAJIAAAALwAAADYTwhMtaGhlYQAAAngAAAAcAAAAJAfeA4RobXR4AAAClAAAAAwAAAAMDAAAAGxvY2EAAAKgAAAACAAAAAgAJAA4bWF4cAAAAqgAAAAeAAAAIAEPAB5uYW1lAAACyAAAAUUAAAJtPlT+fXBvc3QAAAQQAAAAJQAAADbEBOtHeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2BkYWCcwMDKwMHUyXSGgYGhH0IzvmYwYuRgYGBiYGVmwAoC0lxTGByeJb9mYW7438AQw9zA0AAUZgTJAQDl9AxPeJztkLERgDAMA9+OScExCAUDUdGwO02GCIqBLdDdW2fZlYAJKGITAXZgDO1KLfPCnHnkT5Ubfp0teofPJdOtprtG5deSc303H209jGZbPOA3nCUO9gAAAAABAAD/wAN/A0AAEQAAFy4BJxE+ATcyFwEeARQGBwEG6C04AQE4LSAfAhoeHyAd/eYfQAFCNQKQNUIBE/64EjQ+NBL+uBMAAAACAAAAAAMAAqsAAwAHAAABMxEjIREzEQJWqqr+qqoCqv2sAlT9rAB4nGNgZGBgAOIHZ6/qxfPbfGXgZmEAgRuB6TMQ9P8DLAzMDkAuBwMTSBQARQEKwQB4nGNgZGBgbvjfwBDDwgACQJKRARUwAwBHCQJsBAAAAAQAAAAEAAAAAAAAAAAkADh4nGNgZGBgYGYQYmBiAAEQyQWEDAz/wXwGAAqLAS4AAHicZY9NTsMwEIVf+gekEqqoYIfkBWIBKP0Rq25YVGr3XXTfpk6bKokjx63UA3AejsAJOALcgDvwSCebNpbH37x5Y08A3OAHHo7fLfeRPVwyO3INF7gXrlN/EG6QX4SbaONVuEX9TdjHM6bCbXRheYPXuGL2hHdhDx18CNdwjU/hOvUv4Qb5W7iJO/wKt9Dx6sI+5l5XuI1HL/bHVi+cXqnlQcWhySKTOb+CmV7vkoWt0uqca1vEJlODoF9JU51pW91T7NdD5yIVWZOqCas6SYzKrdnq0AUb5/JRrxeJHoQm5Vhj/rbGAo5xBYUlDowxQhhkiMro6DtVZvSvsUPCXntWPc3ndFsU1P9zhQEC9M9cU7qy0nk6T4E9XxtSdXQrbsuelDSRXs1JErJCXta2VELqATZlV44RelzRiT8oZ0j/AAlabsgAAAB4nGNgYoAALgbsgJmRiZGZkYWBpSAnsZK1ILG0OJWBAQAgUQP5AAAA') format('woff'), url('iconfont.ttf?t=1546339992655') format('truetype'), !* chrome, firefox, opera, Safari, Android, iOS 4.2+*!
+    url('iconfont.svg?t=1546339992655#iconfont') format('svg');
+    !* iOS 4.1- *!
+}*/
+
+#audioPlayer {
+    font-family: "iconfont" !important;
+    font-size: 28px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#music-wrapper .icon-play:before {
+    content: "\e663";
+}
+
+#music-wrapper .icon-pause:before {
+    content: "\eb04";
+}
+
+/*# sourceMappingURL=/css.dfba648a.css.map */
