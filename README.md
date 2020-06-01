@@ -1,6 +1,7 @@
 使用方法
 
 进入parcel官网使用yarn或者npm命令安装parcel
+
 Yarn：
 yarn global add parcel-bundler
 
